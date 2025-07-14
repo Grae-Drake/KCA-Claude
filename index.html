@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Kitsap Cultural Access</title>
+    <meta name="description" content="Kitsap Cultural Access is a community initiative to increase access to arts, culture, heritage, and science across Kitsap County.">
+    <meta property="og:title" content="Home - Kitsap Cultural Access">
+    <meta property="og:description" content="Public access to local culture in Kitsap County">
+    <meta name="theme-color" content="#f27c21">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Header */
+        .header {
+            background: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #f27c21;
+        }
+
+        .cta-button {
+            background: #f27c21;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #e06b1a;
+        }
+
+        .mobile-menu-btn {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            padding: 1rem;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin: 1rem 0;
+        }
+
+        .mobile-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section.bg-light {
+            background: #f8f9fa;
+        }
+
+        .section.bg-neutral {
+            background: #e9ecef;
+        }
+
+        .section.bg-dark {
+            background: #212529;
+            color: white;
+        }
+
+        .badge {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content {
+            display: grid;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.25rem;
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            margin-bottom: 1rem;
+        }
+
+        .hero-text ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: #6c757d;
+            margin-bottom: 3rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-horizontal {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .card-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .card-content h3 {
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #212529;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .divider {
+            height: 1px;
+            background: #dee2e6;
+            margin: 2rem 0;
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #212529;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #f27c21;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #f27c21;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #e06b1a;
+        }
+
+        /* Footer */
+        .footer {
+            background: #212529;
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            height: 60px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #f27c21;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .nav-menu {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .card-horizontal {
+                flex-direction: row;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-content.reverse {
+                grid-template-columns: 1fr 1fr;
+                direction: rtl;
+            }
+
+            .hero-content.reverse > * {
+                direction: ltr;
+            }
+
+            .footer-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#main" class="sr-only">Skip to main content</a>
+            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjZjI3YzIxIi8+Cjx0ZXh0IHg9IjUwIiB5PSIzMCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+S0NBPC90ZXh0Pgo8L3N2Zz4K" alt="KCA Logo" class="logo">
+            
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#established_plans">Established Plans</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+
+            <a href="#contact" class="cta-button">Get Involved</a>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+
+            <div class="mobile-menu" id="mobileMenu">
+                <ul>
+                    <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+                    <li><a href="#established_plans" onclick="closeMobileMenu()">Established Plans</a></li>
+                    <li><a href="#impact" onclick="closeMobileMenu()">Impact</a></li>
+                    <li><a href="#support" onclick="closeMobileMenu()">Support</a></li>
+                    <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Next Meeting Banner -->
+        <section class="section bg-light">
+            <div class="container">
+                <div class="badge">
+                    Next meeting: Friday July 25th at noon in Bremerton. Venue TBD, email grae@kitsapculturalaccess.org for details
+                </div>
+            </div>
+        </section>
+
+        <div class="divider"></div>
+
+        <!-- About Section -->
+        <section id="about" class="section bg-light">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Kitsap Cultural Access</h1>
+                        <p class="subtitle">Public access to local culture</p>
+                        <p>Kitsap Cultural Access is a community initiative to increase access to arts, culture, heritage, and science across Kitsap County, particularly for youth.</p>
+                        <p><strong>Our goals are to:</strong></p>
+                        <ul>
+                            <li>Support public programs in arts, culture, heritage, and science</li>
+                            <li>Increase access and remove barriers to these programs, particularly for youth</li>
+                            <li>Improve livability measures in Kitsap County</li>
+                            <li>Strengthen Kitsap's creative economy</li>
+                        </ul>
+                        <p>Our first step is to develop a cultural access program for Kitsap County to adopt under <a href="https://app.leg.wa.gov/RCW/default.aspx?cite=36.160.030">RCW. 36.160.030</a>, the tool set Washington State created for communities to create and fund cultural access plans for the public benefit.</p>
+                    </div>
+                    <div class="hero-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZTllY2VmIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiPllvdXRoIFdlbGRpbmc8L3RleHQ+Cjwvc3ZnPgo=" alt="Youth welding program">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secondary About Section -->
+        <section class="section bg-light">
+            <div class="container">
+                <div class="hero-content reverse">
+                    <div class="hero-text">
+                        <p>Thriving, creative communities like Tacoma, King County, Olympia, San Juan County and Vancouver have used these tools to successfully remove barriers and increase access to local public programs. Kitsap County can join their ranks.</p>
+                        <a href="#contact" class="cta-button">Get involved</a>
+                    </div>
+                    <div class="hero-image">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZDFmMmViIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IiM2Yzc1N2QiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkNvbW11bml0eSBBcnQ8L3RleHQ+Cjwvc3ZnPgo=" alt="Community art">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Established Plans Section -->
+        <section id="established_plans" class="section bg-neutral">
+            <div class="container">
+                <h2 class="section-title">Established Plans</h2>
+                <p class="section-subtitle">These Washington communities support cultural access</p>
+                
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjI3YzIxIi8+Cjx0ZXh0IHg9IjQwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VGFjb21hPC90ZXh0Pgo8L3N2Zz4K" alt="Tacoma Creates" class="card-image">
+                            <div class="card-content">
+                                <h3>Tacoma Creates</h3>
+                                <p>Passed in 2018, Tacoma established Washington's first cultural access program with <a href="https://www.tacomacreates.org/">Tacoma Creates</a>. This popular and successful program supported 80 nonprofits in arts, culture, heritage, and science in 2025-2026, with a particular focus on underserved youth.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMjE5NjUzIi8+Cjx0ZXh0IHg9IjQwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+T2x5bXBpYTwvdGV4dD4KPC9zdmc+Cg==" alt="Inspire Olympia" class="card-image">
+                            <div class="card-content">
+                                <h3>Inspire Olympia</h3>
+                                <p>Passed in 2022, Olympia manages the <a href="https://www.olympiawa.gov/community/arts,_culture___heritage/cultural_access.php">Inspire Olympia</a> program at the city level through applications reviewed by a group of community members and a Cultural Access Advisory Board. Focusing on youth and underserved populations, this program supported 60 local nonprofits during the last annual cycle.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMDAzMzY2Ii8+Cjx0ZXh0IHg9IjQwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+S2luZyBDbzwvdGV4dD4KPC9zdmc+Cg==" alt="Doors Open King County" class="card-image">
+                            <div class="card-content">
+                                <h3>Doors Open King County</h3>
+                                <p>King County's <a href="https://www.4culture.org/doors-open/">Doors Open</a> program was passed in December 2023. Administered by 4Culture, this program provides an estimated $100 million per year using an existing granting system already used to distribute lodging tax funds. The Open Doors program also focuses on wide distribution of funds, with a minimum of 25% of funds being granted to organizations outside of Seattle.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjMzM2NmNjIi8+Cjx0ZXh0IHg9IjQwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+U2FuIEp1YW48L3RleHQ+Cjwvc3ZnPgo=" alt="San Juan County" class="card-image">
+                            <div class="card-content">
+                                <h3>San Juan County</h3>
+                                <p>Approved at the December 2024 county council meeting, the San Juan County tax to support Cultural Access went into effect in April 2025 to begin funding the program. Managed by the <a href="https://www.sanjuancountywa.gov/2168/Cultural-Access-Program-Proposal">Parks, Recreation and Fair Department</a> of the county, collected funds will first be used to support access to arts, culture and science opportunities by schools.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjNjk0NTE4Ii8+Cjx0ZXh0IHg9IjQwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+VmFuY291dmVyPC90ZXh0Pgo8L3N2Zz4K" alt="Vancouver" class="card-image">
+                            <div class="card-content">
+                                <h3>Vancouver</h3>
+                                <p>Much like San Juan County, the <a href="https://www.cityofvancouver.us/government/department/parks-recreation-and-cultural-services/culture-arts-and-heritage/cultural-access-program/">City of Vancouver</a>'s Cultural Access program was approved in December 2024 and began collecting funds in April 2025. Expected to generate up to $7 million each year, a portion will be used to support programs for K-12 education.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-horizontal">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjZjI3YzIxIi8+Cjx0ZXh0IHg9IjQwIiB5PSI0NSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+S2l0c2FwPzwvdGV4dD4KPC9zdmc+Cg==" alt="Kitsap Cultural Access" class="card-image">
+                            <div class="card-content">
+                                <h3>Kitsap?</h3>
+                                <p>If successful, a cultural access plan would expand public access to cultural institutions and experiences in Kitsap county, particularly for youth.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#contact" class="cta-button">Get involved</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="section bg-light">
+            <div class="container">
+                <h2 class="section-title">Impact</h2>
+                
+                <div class="cards-grid">
